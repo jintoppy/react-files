@@ -1,7 +1,10 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Main from './components/Main';
+
+
 ReactDOM.render(
-        <div>Hi</div>
+        <Main />
     ,
     document.getElementById('container')
 )
