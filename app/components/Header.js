@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 class Header extends Component{
     constructor(props){
@@ -6,12 +7,16 @@ class Header extends Component{
         this.state = {
             menuItems: [
                 {
-                    link: 'https://google.com',
-                    title: 'GOOGLE'
+                    link: '/userdetails',
+                    title: 'User Details'
                 },
                 {
-                    link: 'https://yahoo.com',
-                    title: 'YAHOO'
+                    link: '/adduser',
+                    title: 'Add User'
+                },
+                {
+                    link: '/',
+                    title: 'Home'
                 }
             ]
         };
@@ -20,7 +25,11 @@ class Header extends Component{
         const listItems = this.state.menuItems.map((item, index) => {
             return (
                 <li key={index}>
-                    <a href={item.link}>{item.title}</a>
+                    <Link 
+                        activeClassName="active" 
+                        to={item.link}>
+                            {item.title}
+                    </Link>
                 </li>
             )
         });

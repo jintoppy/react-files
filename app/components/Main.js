@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import EmployeeContainer from './EmployeeContainer';
 
 class Main extends Component{
     constructor(props){
@@ -18,7 +17,9 @@ class Main extends Component{
         return (
             <div>
                 <Header />
-                <EmployeeContainer />
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

@@ -1,10 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import Main from './components/Main';
+import EmployeeDetails from './components/EmployeeDetails';
+import Home from './components/Home';
+import AddUser from './components/AddUser';
 
 
 ReactDOM.render(
-        <Main />
+        <div>
+            <Router history={hashHistory}>
+                <Route path="/" component={Main}>
+                    <Route path="userdetails" component={EmployeeDetails} />
+                    <Route path="adduser" component={AddUser} />
+                    <IndexRoute component={Home} />
+                </Route>
+            </Router>
+        </div>        
     ,
     document.getElementById('container')
 )
