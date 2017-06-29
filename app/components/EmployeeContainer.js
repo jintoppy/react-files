@@ -1,21 +1,13 @@
 import React, {Component} from 'react';
 import EmployeeList from './EmployeeList';
 import EmployeeDetails from './EmployeeDetails';
+import 'whatwg-fetch'
 
 class EmployeeContainer extends Component{
     constructor(props){
         super(props);
         this.state = {
-            employees: [
-                {
-                    name: 'Vishal',
-                    empId: 'E1'
-                },
-                {
-                    name: 'Lakshmi',
-                    empId: 'E2'
-                }
-            ],
+            employees: [],
             selectedEmployee: null
         };
     }
@@ -24,24 +16,13 @@ class EmployeeContainer extends Component{
             selectedEmployee: employee
         });
     }
-    // componentWillMount(){
-    //     console.log('inside componentWillMount');
-    // }
-    // componentDidMount(){
-    //     console.log('inside componentDidMount');
-    // }
-    // shouldComponentUpdate(){
-    //     console.log('inside shouldComponentUpdate');
-    //     return true;
-    // }
-    componentWillUpdate(event, nextState, nextProps){
-        console.log(nextState);
-        console.log(this.state);
-        console.log('inside componentWillUpdate');
+    componentWillMount(){
+        fetch('https://api.github.com/users')
+            .then(res => res.json())
+            .then(res => this.setState({
+                employees: res
+            }));
     }
-    // componentDidUpdate(){
-    //     console.log('inside componentDidUpdate');
-    // }
     render(){
         return (
             <div>

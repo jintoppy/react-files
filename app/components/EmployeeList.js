@@ -10,16 +10,12 @@ class EmployeeList extends Component {
             }
         };
     }
-    shouldComponentUpdate(){
-        return false;
-    }
     render(){
-        console.log('render of EMployee List');
         const employees = this.props.employees.map((emp, index) => {
             return (
                 <tr key={index}>
-                    <td>{emp.name}</td>
-                    <td>{emp.empId}</td>
+                    <td>{emp.login}</td>
+                    <td>{emp.id}</td>
                     <td>
                         <button 
                             onClick={this.props.onSelectedEmployeeChange.bind(null, emp)}>
