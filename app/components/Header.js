@@ -34,9 +34,17 @@ class Header extends Component{
             )
         });
         return (
-            <ul>
-                {listItems}
-            </ul>
+            <div className="header">
+                <div className="logo">
+
+                </div>
+                <div className="nav">
+                    <ul>
+                        {listItems}
+                    </ul>
+                </div>
+                
+            </div>
         )
     }
 }

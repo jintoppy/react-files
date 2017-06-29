@@ -11,7 +11,7 @@ ReactDOM.render(
         <div>
             <Router history={hashHistory}>
                 <Route path="/" component={Main}>
-                    <Route path="userdetails" component={EmployeeDetails} />
+                    <Route path="userdetails/:username" component={EmployeeDetails} />
                     <Route path="adduser" component={AddUser} />
                     <IndexRoute component={Home} />
                 </Route>

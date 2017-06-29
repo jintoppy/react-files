@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 class EmployeeList extends Component {
     constructor(props){
@@ -17,10 +18,7 @@ class EmployeeList extends Component {
                     <td>{emp.login}</td>
                     <td>{emp.id}</td>
                     <td>
-                        <button 
-                            onClick={this.props.onSelectedEmployeeChange.bind(null, emp)}>
-                            View Details
-                        </button>
+                        <Link to={"/userdetails/"+emp.login}>View Details</Link>
                     </td>
                 </tr>
             )

@@ -83,7 +83,7 @@
 	        _react2.default.createElement(
 	            _reactRouter.Route,
 	            { path: '/', component: _Main2.default },
-	            _react2.default.createElement(_reactRouter.Route, { path: 'userdetails', component: _EmployeeDetails2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'userdetails/:username', component: _EmployeeDetails2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'adduser', component: _AddUser2.default }),
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
 	        )
@@ -25015,9 +25015,18 @@
 	                );
 	            });
 	            return _react2.default.createElement(
-	                'ul',
-	                null,
-	                listItems
+	                'div',
+	                { className: 'header' },
+	                _react2.default.createElement('div', { className: 'logo' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'nav' },
+	                    _react2.default.createElement(
+	                        'ul',
+	                        null,
+	                        listItems
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -25068,25 +25077,12 @@
 	    }
 	
 	    _createClass(EmployeeDetails, [{
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            if (nextProps.selectedEmployee) {
-	                if (!this.props.selectedEmployee) {
-	                    return true;
-	                }
-	                return nextProps.selectedEmployee.login !== this.props.selectedEmployee.login;
-	            }
-	            return false;
-	        }
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
 	            var _this2 = this;
 	
-	            var selectedEmployee = this.props.selectedEmployee;
-	
-	            if (selectedEmployee) {
-	                fetch('https://api.github.com/users/' + selectedEmployee.login).then(function (res) {
+	            if (this.props.params) {
+	                fetch('https://api.github.com/users/' + this.props.params.username).then(function (res) {
 	                    return res.json();
 	                }).then(function (res) {
 	                    return _this2.setState({
@@ -25753,6 +25749,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(159);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25781,8 +25779,6 @@
 	    _createClass(EmployeeList, [{
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
-	
 	            var employees = this.props.employees.map(function (emp, index) {
 	                return _react2.default.createElement(
 	                    'tr',
@@ -25801,9 +25797,8 @@
 	                        'td',
 	                        null,
 	                        _react2.default.createElement(
-	                            'button',
-	                            {
-	                                onClick: _this2.props.onSelectedEmployeeChange.bind(null, emp) },
+	                            _reactRouter.Link,
+	                            { to: "/userdetails/" + emp.login },
 	                            'View Details'
 	                        )
 	                    )

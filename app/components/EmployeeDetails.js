@@ -8,25 +8,14 @@ class EmployeeDetails extends Component {
             activeUser: null
         };
     }
-    shouldComponentUpdate(nextProps, nextState){
-        if(nextProps.selectedEmployee){
-            if(!this.props.selectedEmployee){
-                return true;
-            }
-            return nextProps.selectedEmployee.login !== this.props.selectedEmployee.login;
-        }
-        return false;        
-    }
-    componentDidUpdate(){
-        const {selectedEmployee} = this.props;
-        if(selectedEmployee){
-            fetch(`https://api.github.com/users/${selectedEmployee.login}`)
+    componentDidMount(){
+        if(this.props.params){
+            fetch(`https://api.github.com/users/${this.props.params.username}`)
                 .then(res => res.json())
                 .then(res => this.setState({
                     activeUser: res
                 }));
-        }
-        
+        }        
     }
     render(){
         const {activeUser} = this.state;
