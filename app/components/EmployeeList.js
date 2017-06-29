@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import PropTypes from 'prop-types'; 
 
 class EmployeeList extends Component {
     constructor(props){
@@ -53,6 +54,15 @@ class EmployeeList extends Component {
     }
     
 }
+
+EmployeeList.propTypes = {
+    employees: PropTypes.arrayOf(Object).isRequired
+};
+
+EmployeeList.defaultProps = {
+    employees: []
+};
+
 
 
 export default EmployeeList;
