@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import EmployeeList from './EmployeeList';
 import EmployeeDetails from './EmployeeDetails';
+import EmployeeStore from '../stores/EmployeeStore';
+import EmployeeActions from '../actions/EmployeeActions';
 import 'whatwg-fetch'
 
 class EmployeeContainer extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            employees: [],
-            selectedEmployee: null
-        };
+        this.state = EmployeeStore.getState();
+    }
+    componentDidMount(){
+        EmployeeStore.addChangeListener(this.handleChange);
+    }
+    handleChange(){
+        const newState = EmployeeStore.getState();
+        this.setState(newState);
+    }
+    componentWillUnmount(){
+        EmployeeStore.removeChangeListener(this.handleChange);
     }
     onSelectedEmployeeChange(employee){
         this.setState({
@@ -19,9 +28,7 @@ class EmployeeContainer extends Component{
     componentWillMount(){
         fetch('https://api.github.com/users')
             .then(res => res.json())
-            .then(res => this.setState({
-                employees: res
-            }));
+            .then(res => EmployeeActions.onEmployeeListReceived(res));
     }
     render(){
         return (
